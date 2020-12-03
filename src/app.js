@@ -73,11 +73,24 @@ app.get("/help/*", (req, res) => {
 });
 
 app.get("/api", (req, res) => {
-  res.json({
-    geolocation: "hello",
-    time: "12:24",
-    age: 22,
+  geocode("london", (error, { latitude, longitude, location }) => {
+    if (error) {
+      return res.send({
+        error,
+      });
+    } else {
+      return res.send({
+        latitude,
+        longitude,
+        location,
+      });
+    }
   });
+  // res.json({
+  //   geolocation: "hello",
+  //   time: "12:24",
+  //   age: 22,
+  // });
 });
 
 app.get("*", (req, res) => {
@@ -89,5 +102,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("app is running on port" + port);
+  console.log("app is running on port " + port);
 });
