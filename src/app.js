@@ -7,6 +7,7 @@ const forecast = require("./utils/forecast");
 
 const app = express();
 
+const port = process.env.PORT || 3000;
 //Define paths for Express Config
 const publicDirectoryPath = path.join(__dirname, "../public");
 const viewPath = path.join(__dirname, "../templates/views");
@@ -71,6 +72,14 @@ app.get("/help/*", (req, res) => {
   });
 });
 
+app.get("/api", (req, res) => {
+  res.json({
+    geolocation: "hello",
+    time: "12:24",
+    age: 22,
+  });
+});
+
 app.get("*", (req, res) => {
   res.render("404", {
     title: "404",
@@ -79,6 +88,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("app is running");
+app.listen(port, () => {
+  console.log("app is running on port" + port);
 });
