@@ -72,27 +72,6 @@ app.get("/help/*", (req, res) => {
   });
 });
 
-app.get("/api", (req, res) => {
-  geocode("london", (error, { latitude, longitude, location }) => {
-    if (error) {
-      return res.send({
-        error,
-      });
-    } else {
-      return res.send({
-        latitude,
-        longitude,
-        location,
-      });
-    }
-  });
-  // res.json({
-  //   geolocation: "hello",
-  //   time: "12:24",
-  //   age: 22,
-  // });
-});
-
 app.get("*", (req, res) => {
   res.render("404", {
     title: "404",
